@@ -124,3 +124,8 @@ python eval_dev/run_dev.py --agent environment/agent.py
 Public fixtures include answers for analysis. Formal episodes have independent
 archives and trajectories and are not present in this workspace. Development
 scores are diagnostic, not formal acceptance or a measure of LLM-call difficulty.
+
+The current development release contains twelve complete public episodes. The
+original two-episode release remains archived with the blind-challenge evidence.
+The additional ten episodes provide more development data; no scoring gate or
+hidden episode was changed.

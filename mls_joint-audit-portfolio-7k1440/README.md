@@ -116,7 +116,10 @@ Hidden cases vary parameter draws and mechanism combinations while respecting
 the assumptions above. No hidden labels, generator, reference implementation,
 or scoring process is accessible in the candidate sandbox. Inputs are immutable;
 copy arrays when needed. Runtime is one CPU thread, 4 GiB address space, and
-60 seconds per interface call. The starter gives exact data-free worst-case
+60 seconds per interface call. The full verifier has a 900-second wall-clock
+deadline, with each load/call bounded by its remaining time. An error, timeout,
+or failed functional gate returns a nonzero verifier exit status. The starter
+gives exact data-free worst-case
 bounds; it needs measurements to produce a sufficiently informative report.
 
 ## Public development
@@ -128,6 +131,12 @@ runtime directory:
 python3 eval_dev/run_dev.py --candidate environment --runtime-root /var/tmp/obm-research-runtime --output dev-result.json
 ```
 
-Six static public examples and their debugging answers are in `eval_dev`.
+Sixty static public examples and their debugging answers are in `eval_dev`.
+The original six were retained; 54 independent examples were added after the
+independent blind trial. This later expansion does not revise its historical result.
 The runner is independent of the hidden generator and references. A development
 pass is diagnostic; it is not a complete hidden evaluation or difficulty rating.
+
+The overall deadline is enforced through cooperative checks and RPC timeouts.
+It does not claim preemptive termination of arbitrary blocking trusted-parent
+generation, process construction, cleanup or filesystem I/O.
